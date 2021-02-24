@@ -1,7 +1,0 @@
-\contentsline {chapter}{\numberline {1}Template}{2}%
-\contentsline {section}{\numberline {1.1}tcolorbox}{2}%
-\contentsline {section}{\numberline {1.2}minted}{2}%
-\contentsline {chapter}{\numberline {2}Graphentheorie}{3}%
-\contentsline {section}{\numberline {2.1}Zusammenhang}{3}%
-\contentsline {section}{\numberline {2.2}Artikulationsknoten und Brücken}{4}%
-\contentsline {section}{\numberline {2.3}Block-Graphen}{5}%
