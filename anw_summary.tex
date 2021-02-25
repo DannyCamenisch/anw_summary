@@ -126,10 +126,10 @@ wie stark ein Graph zusammenhängend ist. Dafür definieren wir sowohl Knoten- a
 
 \begin{definition}
     Ein Graph $G = (V,E)$ heisst \textbf{k-zusammenhängend}, falls $|V| \geq k + 1$ und $\forall X \subseteq V$
-    mit $|X| \geq k$ gilt: $G[V \backslash X]$ ist zusammenhängend. \\
+    mit $|X| < k$ gilt: $G[V \backslash X]$ ist zusammenhängend. \\
 
     Ein Graph $G = (V,E)$ heisst \textbf{k-kanten-zusammenhängend}, falls $\forall X \subseteq E$
-    mit $|X| \geq k$ gilt: $(V, E \backslash X)$ ist zusammenhängend.
+    mit $|X| < k$ gilt: $(V, E \backslash X)$ ist zusammenhängend.
 \end{definition}
 \bigskip
 
