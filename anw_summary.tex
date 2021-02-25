@@ -10,6 +10,9 @@
 \usepackage{algorithm} % pseudocode
 \usepackage{algpseudocode} % pseudocode
 \usepackage[german]{babel}
+\usepackage{graphicx} % using images
+
+\graphicspath{ {./assets/} } % setting the path for images
 
 % LimeGreen!40
 % blue!20
@@ -80,7 +83,6 @@
     This is a \textbf{tcolorbox}.
 \tcblower
     Here, you see the lower part of the box.
-
 \tcbsubtitle{subtitle}
 \end{tcolorbox}
 
@@ -306,6 +308,7 @@ Wir erinnern uns an die Definition von bipartiten Graphen.
 \end{definition}
 \bigskip
 
+
 \section{Block-Graphen}
 Ein Block-Graph ist nun wiefolgt definitert:
 
@@ -318,6 +321,13 @@ Ein Block-Graph ist nun wiefolgt definitert:
     \end{itemize}
 \end{definition}
 \bigskip
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{block_graph.png}
+    \caption{Beispiel eines Block-Graphen (links) und der }
+\end{figure}
+
 
 \chapter{Kreise}
 \section{Eulertour}
