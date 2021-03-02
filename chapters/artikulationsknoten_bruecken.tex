@@ -44,7 +44,7 @@ $
         \begin{cases}
             \text{dfs}[w], \text{ falls }(v,w) \text{ Restkante}\\
             \text{low}[w], \text{ falls }(v,w) \text{ Baumkante}
-          \end{cases}
+        \end{cases}
     \right)
 $ \\
 \\
@@ -74,7 +74,7 @@ und der Startknoten $s$ verlangt wird:
         \State $\forall v \in V : \text{dfs}[v] \leftarrow 0$
         \State num $\leftarrow 0$ \Comment{Anzahl besuchter Knoten}
         \State $T \leftarrow \emptyset$ \Comment{Menge der Kanten im Tiefensuchbaum}
-        \State \Call{DFS-VISIT}{G,s}
+        \State \Call{DFS-Visit}{G,s}
         \If{\text{s hat in T mindestens Grad 2}}
             \State isArtVert[$s$] $\leftarrow$ TRUE
         \Else
@@ -84,7 +84,7 @@ und der Startknoten $s$ verlangt wird:
 \end{algorithm}
 \pagebreak
 \begin{algorithm}
-    \caption{DFS-VISIT(G,v)}
+    \caption{DFS-Visit(G,v)}
     \begin{algorithmic}[1]
         \State num $\leftarrow$ num $ + 1$
         \State dfs[$v$] $\leftarrow$ num
@@ -94,7 +94,7 @@ und der Startknoten $s$ verlangt wird:
         \For{$(v,w) \in E$}
             \If{dfs[$w$] $= 0$}
                 \State $T \leftarrow T + (v,w)$
-                \State val $\leftarrow$ \Call{DFS-VISIT}{G,w} \Comment{low-Wert des direkten Nachfolgers}
+                \State val $\leftarrow$ \Call{DFS-Visit}{G,w} \Comment{low-Wert des direkten Nachfolgers}
                 \If{val $\geq$ dfs[$v$]}
                 \State isArtVert[$v$] $\leftarrow$ TRUE
                     \If{val $>$ dfs[$v$]}
