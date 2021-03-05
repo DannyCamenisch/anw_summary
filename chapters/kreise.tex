@@ -135,3 +135,48 @@ dafür aber nur Speicherplatz in $\mathcal{O}(|V|^2)$, weshalb dieser Algorithmu
 Wir bemerken den drastischen Laufzeitunterschied gegenüber der Eulertour: Dort benötigten wir gerade 
 einmal $\mathcal{O}(|E|)$ Zeit, um eine solche zu finden, während das Hamiltonkreisproblem nicht in polynomieller Zeit lösbar ist, da es 
 NP-vollständig ist.
+
+\section{NP-Probleme}
+
+\begin{definition}
+    Ein NP-Problem, ist ein Problem, dass nicht in polynomieller Laufzeit gelöst werden kann 
+    (man nimmt es mindestens an). Das Gegenteil dazu sind P-Probleme.
+\end{definition}
+
+\section{Traveling Salesman}
+
+Das Traveling Salesman Problem ist ein sehr berühmtes Problem:
+
+\begin{definition}
+    \textit{Gegeben sei ein vollständiger Graph mit n Knoten, berechne die kürzeste Rundreise.}
+\end{definition}
+\bigskip
+
+Dies bedeutet effektiv, dass wir den minimalen Hamiltonkreis suchen. Das TSP ist stark mit dem Hamiltonkreisproblem
+verwandt, aber wir haben nun statt einer binären Antwort, viele Antwortmöglichkeiten. Wir können aber aus dem TSP
+ein Optimierungsproblem machen. Bezeichned opt$(K_n,l)$ die optimale Lösung für einen Graphen $K_n$ mit
+Gewichtsfunktion $l$, so sprechen wir von einem $\alpha$-Approximationsalgorithmus, falls dieser immer eine 
+Lösung $C$ mit
+$$\sum_{e \in C} l(e) \leq \alpha \cdot \text{opt}(K_n, l)$$
+findet. Allerdings sind wir so immernoch sehr eingeschränkt, denn wenn wir einen Graphen so konstruieren, dass
+wir das Hamiltonkreisproblem lösen : Alle Kanten, die in einem anderen Graph (der zu untersuchen ist) vorkommen,
+haben Gewicht 0. Da $\alpha \cdot 0 = 0$ müsste ein $\alpha$-Approximation immer einen Hamiltonkreis in seiner
+Laufzeit finden. \\
+
+Mithilfe einer zusätzlichen Annahme, können wir das TSP in aktzeptabler Laufzeit approximieren: Wir erwarten,
+dass die Kantenlänge die \textit{Dreiecksungleichung} erfüllen, dass sich also Umwege nie lohnen würden. Wir
+nenne dies, dass metrische TSP.
+
+\begin{satz}[Satz]
+    Für das metrische TSP gibt es einen 2-Approximationsalgorithmus mit Laufzeit $\mathcal{O}(n^2)$.
+\end{satz}
+\bigskip
+
+Wir erreichen dies wie folgt: Wir berechne zuerst den MST des Graphen in $\mathcal{O}(n^2)$. Nun verdoppeln wir
+alle Kanten - dadurch erhalten wir einen Weg von Länge $2 \cdot$ MST. Nun finden wir eine Eulertour, und durchlaufen
+diese erneut, wobei wir 'Abkürzungen' verwenden, also keinen bereits besuchten Knoten erneut besuchen. Aufgrund der
+Dreiecksungleichung wird unser Weg dadruch garantiert nicht länger. Da aus einem Hamiltonkreis durch entfernen einer
+Kante ein Spannbaum wird, muss offensichtlich gelten dass
+$$\text{MST}(K_n,l) \leq \text{opt}(K_n,l)$$
+Insbesondere muss also die Länge unseres gefundenen Hamiltonkreises kleiner sein als $2 \cdot$ MST, und damit kleiner
+als $2 \cdot$ opt, was ja genau zu zeigen war.

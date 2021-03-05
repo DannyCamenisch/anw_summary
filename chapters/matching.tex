@@ -1,0 +1,52 @@
+\chapter{Matching}
+
+Viele Zuordnungsprobleme lassen sich als ein Graphenproblem modellieren. Nehmen wir etwa an, wir müssen 
+Jobs auf Rechner verteilen, aber nicht alle Rechner können alle Jobs ausführen. Modellieren wir dies durch 
+einen Graphen, wobei Jobs und Rechner durch Knoten dargestellt sind, und Kanten zwischen Job und Rechner 
+bedeuten das Erfüllen der Vorraussetzungen für den Job. Nun suchen wir eine Zuordnung, die möglichst jedem 
+Job einen Rechner und jedem Rechner einen Job (der ausgeführt werden kann) zuordnet.
+
+\begin{definition}
+    Eine Kantenmenge $M \subseteq E$ heisst \textbf{Matching} in einem Graphen $G = (V,E)$, falls kein
+    Knoten des Graphen zu mehr als einer Kante aus $M$ inzident ist, oder formal ausgedrückt, wenn
+    $$e \cap f = \emptyset \text{    für alle    } e,f \in M \text{    mit    } e \neq f$$
+    Ein Knoten $v$ wir von $M$ \textbf{überdeckt}, falls eine Kante $e \in M$ gibt, die $v$ enthält. \\
+
+    Ein Matching $M$ heisst \textbf{perfektes Matching}, wenn jeder Knoten durch genau eine Kante aus
+    $M$ überdeckt wird, oder, anders ausgedrückt, wenn $|M| = \frac{|V|}{2} $.
+\end{definition}
+\bigskip
+
+Wir intressieren uns oft dafür, ein möglichst grosses Matching zu finden. Hierfür müssen wir definieren, was ein
+möglichst grosses Matching ist:
+
+\begin{definition}
+    Sei $G = (V,E)$ ein Graph mit einem Matching $M$.
+    \begin{itemize}
+        \item $M$ heisst \textbf{inklusionsmaximal}, wenn es kein Matching $M'$ mit $M \subseteq M'$ und $|M| < |M'|$ gibt.
+        \item $M$ heisst \textbf{kardinalitätsmaximal} (oder nur maximal), wenn es kein Matching mit $|M| < |M'|$ gibt.
+    \end{itemize}
+    Ein kardinalitätsmaximales Matching ist auch immer inklusionsmaximal, aber nicht umgekehrt. Weiter gilt,
+    $|M_{inc}| \geq |M_{max}| / 2$. Haben wir ein kardinalitätsmaximal Matching mit $M = |V| / 2$, überdeckt es also alle
+    Knoten, so nenne wir es ein \textbf{perfektes Matching}.
+\end{definition}
+
+\section{Matching-Algorithmen}
+
+Wir schauen uns nun ein paar Algorithmen an, mitwelchen wir Matchings finden können.
+
+\begin{algorithm}
+    \caption{Greedy-Matching(G)}
+    \begin{algorithmic}[1]
+        \State $M \leftarrow \emptyset$
+        \While{$E \neq \emptyset$}
+            \State wähle eine beliebige Kante $e \in E$
+            \State $ M \leftarrow M \cup \{e\}$
+            \State lösche $e$ und alle inzidenten Kanten in $G$
+        \EndWhile
+        \State \Return $M$
+    \end{algorithmic}
+\end{algorithm}
+
+Mit dem Greedy-Algorithmus kann in $\mathcal{O}(|E|)$ ein Matching bestimmt werden. Es gilt
+$|M_{Greedy}| \geq |M_{max}| / 2$, wobei $M_{max}$ ein kardinalitätsmaximales Matching ist.
