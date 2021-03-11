@@ -52,7 +52,7 @@ Mit dem Greedy-Algorithmus kann in $\mathcal{O}(|E|)$ ein Matching bestimmt werd
 $|M_{Greedy}| \geq |M_{max}| / 2$, wobei $M_{max}$ ein kardinalitätsmaximales Matching ist. \\
 
 Solch ein Greedy-Matching muss nicht umbedingt ein kardinalitätsmaximales Matching sein. Wollen wir solche eines finden, dann
-brauchen wir einen anderen Algorithmus. Dafür führen wir den Begriff des \textbf{augmentierenden Pfad} einführen.
+brauchen wir einen anderen Algorithmus. Dafür führen wir den Begriff des \textbf{augmentierenden Pfad} ein.
 \begin{definition}
     Für ein Matching $M$, nennen wir eine Pfad \textbf{$M$-augmentierender}, wenn er abwechselnd Kanten
     aus $M$ und nicht aus $M$ enthält, und in (unterschiedlichen) Knoten die nicht von $M$ überdeckt werden startet und endet.
@@ -107,8 +107,8 @@ Da BFS in $\mathcal{O}(|V| + |E|)$ läuft, und unser Matching maximal eine Grös
 hat, läuft unser Algorithmus in $\mathcal{O}(|V| \cdot |E|)$. Es ist einfach zu sehen, dass der kürzeste Pfad von
 $L_0$ nach $v$ die Länge $i$ hat. \\
 
-Wir können diesen Algorithmus aber noch etwas optimieren, so dass er in $\mathcal{O}(\sqrt{|V|} \cdot (|V| + |E|))$ läuft. Anstatt den erst besten Pfad
-zurückzugeben, suchen wir für alle unüberdeckten $v$ in $L_i$ knotendisjunkte Pfade nach $L_0$.
+Wir können diesen Algorithmus aber noch etwas optimieren, so dass er in $\mathcal{O}(\sqrt{|V|} \cdot (|V| + |E|))$ läuft. Anstatt den erstbesten Pfad
+zurückzugeben, suchen wir knotendisjunkte Pfade alle von unüberdeckten $v$ in $L_i$ nach $L_0$.
 
 \begin{algorithm}
     \caption{Hopcroft-Karp(G)}
@@ -124,4 +124,56 @@ zurückzugeben, suchen wir für alle unüberdeckten $v$ in $L_i$ knotendisjunkte
         \State \Return $M$
     \end{algorithmic}
 \end{algorithm}
-(\textit{Beweis siehe Vorlesung})
+(\textit{Beweis siehe Vorlesung}) \\
+
+Mit viel mehr Aufwand (randomisierte Algorithmen und lineare Programmierung) lassen sich andere effiziente Algorithmen finden,
+die schneller und allgemeiner sind:
+\begin{itemize}
+    \item $\mathcal{O}(|V|^{1/2} \cdot |E|)$ für allgemeine Graphen
+    \item $\mathcal{O}(|V|^{3})$ für gewichtete Graphen
+\end{itemize}
+
+\section{1.5-Approximation des TSP}
+
+Der letztere Algorithmus ist insofern interessant, da wir dadurch eine 1.5-Approximation für das metrische TSP finden können.
+Dies funktioniert ähnlich zur 2-Approximation:
+\begin{enumerate}
+    \item Berechne einen MST $T$ in $G$
+    \item $U := \{\text{Knoten in $T$ mit ungeradem Grad}\}$, berechne ein perfektes Matching $M$ von $U$ mit minimalem Gewicht
+    \item Füge $M$ zu $T$ hinzu, es entsteht ein Multigraph $T'$
+    \item Berechne eine Eulertour $E$ in $T'$
+    \item Kürze $E$ ab: überspringe Knoten die zum wiederholten mal besucht werden.
+\end{enumerate}
+
+\begin{satz}[Satz]
+    Christofides' Algorithmus berechnet in Zeit $\mathcal{O}(|V|^{3})$ eine 1.5-Approximation für das metrische TSP.
+\end{satz}
+\bigskip
+
+Seit September 2020 ist es möglich eine noch bessere Approximation zu finden \\ (1.4999999999999999999999999999999999990-Approximation). Dieser Durchbruch wird in den kommenden Jahren für
+viele Verbesserungen sorgen.
+
+\section{Satz von Hall}
+
+\begin{definition}
+    Ein Graph ist \textbf{regulär}, wenn alle Knoten den selben Grad haben.
+\end{definition}
+
+\begin{satz}[Satz von Hall (Heiratssatz)]
+    Ein bipartiter Graph $G = (A \uplus B, E)$ enthält ein Matching $M$ der Kardinalität $|M| = |A|$, genau dann
+    wenn $\forall X \subseteq A : |X| \leq |N(X)|$.
+\end{satz}
+\bigskip
+
+Als direktes Korollar gibt es den Satz von Frobenius:
+
+\begin{satz}[Satz von Frobenius]
+    Für alle $k$ gilt: jeder $k$-reguläre, bipartite Graph enthält ein perfektes Matching.
+\end{satz}
+\bigskip
+
+Dieses perfekte Matching lässt sich in Zeit $\mathcal{O}(|E|)$ bestimmen. Für $k=2^x$ ist dies leicht einzusehen: Wir bestimmen für
+jede Zusammenhangskomponente eine Eulertour. Dann entfernen wir jede zweite Kante davon, und erhalten einen $2^{x-1}$ regulären Graphen.
+Nach $x$ Iterationen ist der Graph $2^0 = 1$ regulär, d.h. wir haben ein perfektes Matching gefunden. \\
+
+Dies kann verallgemeinert werden, so dass es auch für nicht Zweierpotenzen funktioniert. Dies lassen wir hier aber aus.
