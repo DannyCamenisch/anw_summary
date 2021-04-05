@@ -55,4 +55,52 @@ Dieser Satz wird vorallem oft mit dem Beispiel von medizinischen Tests betrachte
 Ereignisse $P$ = Test positiv, $N$ = Test negativ, $G$ = gesund und $K = krank$, so ist es oft einfach
 die Wahrscheinlichkeiten für Pr$[P | K]$ und Pr$[P | G]$ zu ermitteln. Was jedoch oftmals für die 
 Patienten spannender ist, ist die Wahrscheinlichkeit Pr$[K | P]$, hierfür können wir nun den Satz von
-Bayes verwenden. 
+Bayes verwenden.
+
+\section{Unabhängigkeit}
+
+Bei einer bedingten Wahrscheinlichkeit kann es vorkommen, dass die Bedingung keinen Einfluss auf das
+Ereignis hat.
+
+\begin{definition}
+    Die Ereignisse $A$ und $B$ heissen \textbf{unabhängig}, falls gilt
+    $$\text{Pr}[A \cap B] = \text{Pr}[A] \cdot \text{Pr}[B]$$
+\end{definition}
+\bigskip
+
+Falls $B \neq 0$, können wir zudem die Definition umformen zu:
+
+$$\text{Pr}[A] = \frac{\text{Pr}[A \cap B]}{\text{Pr}[B]} = \text{Pr}[A | B]$$
+
+Es ist wichtig zu bemerken, dass die stochastische Unabhängigkeit nicht umbedingt mit der physikalischen
+Unabhängigkeit gleichzusetzen ist.
+
+Für die Unabhängigkeit von mehreren Ereignissen, gilt folgende Definition.
+
+\begin{definition}
+    Die Ereignisse $A_1, A_2, ... , A_n$ heissen \textbf{unabhängig}, wenn für alle Teilmengen 
+    $I \subseteq \{1, ... , n\}$ mit $I = \{i_1, ... , i_k\}$ gilt, dass
+
+    $$\text{Pr}[A_{i_1} \cap ... \cap A_{i_k}] = \text{Pr}[A_{i_1}] \cdot ... \cdot \text{Pr}[A_{i_k}]$$
+\end{definition}
+\bigskip
+
+Aus diesen Definitionen folgen diese Sätze:
+
+\begin{satz}[Satz]
+    Die Ereignisse $A_1, A_2, ... , A_n$ sind genau dann unabhängig, wenn für alle 
+    $(s_1, ... , s_n) \in \{0, 1\}^n$ gilt, dass
+    
+    $$\text{Pr}[A_1^{s_1}] \cap ... \cap \text{Pr}[A_n^{s_n}] = \text{Pr}[A_i^{s_1}] \cdot ... \cdot \text{Pr}[A_n^{s_n}]$$
+
+    Wobei $A_i^0 = \bar{A_i}$ und $A_i^1 = A_i$.
+\end{satz}
+\bigskip
+
+In Worten: Bei der Unabhängigkeit von Ereignissen können wir stattdessen auch den Schnitt der 
+Komplementärereignisse (und beliebige “Mischungen”) betrachten.
+
+\begin{satz}[Satz]
+    Sind $A, B $ und $C$ unabhängige Ereignisse, so sind auch $A \cap B$ und $C$, bzw. $A \cup B$ und 
+    $C$ unabhängig.
+\end{satz}
